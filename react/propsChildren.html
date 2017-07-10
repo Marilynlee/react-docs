@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    let myStyle = {
+        fontSize: 100,
+        color: '#FF0000'
+    };
+
+    let Welcome=(props)=> {
+        let arr=[props.name,props.title];
+        return(
+        <div>
+            <h1  style={myStyle}>Hi, {arr}</h1>
+            <h3  style={myStyle}>{props.children}</h3>
+        </div>)
+    }
+
+    const element = <Welcome title="Marry" name="Sara">
+            {/*<span>child 1</span>
+            <span>child 2</span>*/}
+            <span>child 1</span>
+            </Welcome>;
+    ReactDOM.render(
+            element,
+            document.getElementById('root')
+    );
+
+
+
+</script>
+</body>
+</html>
