@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="react15.6.1/react-15.6.1.js"></script>
+    <script src="react15.6.1/react-dom-15.6.1.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        label{
+            display: block;
+            margin:20px;
+        }
+        label span{
+            width: 100px;
+            text-align: right;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: top;
+        }
+        label input{
+            line-height: 20px;
+            padding: 2px 5px;
+            border: 1px solid #d1d1d1;
+            border-radius: 3px;
+            outline: none;
+        }
+        label input:focus{
+            border: 1px solid #6cdfe6;
+        }
+        label textarea{
+            border: 1px solid #d1d1d1;
+            border-radius: 5px;
+            outline: none;
+            padding: 5px;
+        }
+        label textarea:focus{
+            border: 1px solid #6cdfe6;
+        }
+        label select{
+            width: 100px;
+            height: 26px;
+            line-height: 26px;
+            padding: 3px;
+            border: 1px solid #d1d1d1;
+            border-radius: 3px;
+            outline: none;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 5px 10px;
+            color: red;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+    class Hobbys extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        render(){
+            return(
+                    <label>
+                        <span>Hobby:</span>
+                        <select ref={this.props.hobbyRef} defaultValue="traveling">
+                            <option value="running">Running</option>
+                            <option value="sleeping">Sleeping</option>
+                            <option value="singing">Singing</option>
+                            <option value="traveling">Traveling</option>
+                        </select>
+                    </label>
+            );
+        }
+
+    }
+    class Colors extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        render(){
+            return(
+                    <label>
+                        <span>color:</span>
+                        red<input name="red" type="checkbox" value='red' ref={(input)=>this.colorRed=input}/>
+                        green<input name="green" type="checkbox" value='green' ref={(input)=>this.colorGreen=input}/>
+                        gray<input name="gray" type="checkbox" value='gray' ref={(input)=>this.colorGray=input}/>
+                    </label>
+            );
+        }
+
+    }
+    class NameForm extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                color:''
+            };
+        }
+
+        handleSubmit = (e) => {
+            e.preventDefault();
+            console.info(`A name was submitted: ${this.nameInput.value}`);
+            console.info(`A description was submitted: ${this.desInput.value}`);
+            console.info(`A hobby was submitted: ${this.hobbyValue.value}`);
+            if(this.colorRed.checked||this.colorRed.checked||this.colorRed.checked){
+
+            }
+            console.info(`A color was submitted: ${this.colorRed.value} ${this.colorGreen.value} ${this.colorGray.value}`);
+        };
+
+        render(){
+            return(
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            <span>Name:</span>
+                            <input name="name" type="text" defaultValue="Marilyn" ref={(input)=>this.nameInput=input} placeholder="Enter your name!"/>
+                        </label>
+
+                        <label>
+                            <span>Description:</span>
+                            <textarea name="des" rows="10" cols="50" ref={(input)=>this.desInput=input} defaultValue="I am a good boy!"  placeholder="Enter your description!"/>
+                        </label>
+                        <Hobbys hobbyRef={(item)=>{this.hobbyValue=item}} />
+                        <input className="btn" type="submit" value="Submit"/>
+                    </form>
+            );
+        }
+
+
+    }
+
+    ReactDOM.render(
+            <NameForm />,
+        document.getElementById('root')
+    );
+
+</script>
+</body>
+</html>
