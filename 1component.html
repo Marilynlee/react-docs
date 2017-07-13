@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,6 @@
     <script src="react15.6.1/react-15.6.1.js"></script>
     <script src="react15.6.1/react-dom-15.6.1.js"></script>
     <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
-    <script src="https://unpkg.com/prop-types/prop-types.js"></script>
 </head>
 <body>
 <div id="root"></div>
@@ -24,7 +24,7 @@
         }
     );*/
 
-    /*function Welcome(props) {
+    function Welcome(props) {
         console.log(arguments);
         return <h1>Hello, {props.name}</h1>;
     }
@@ -39,8 +39,8 @@
             <App />,
         document.getElementById('root')
     );
-*/
-    function formatDate(date) {
+
+    /*function formatDate(date) {
         return date.toLocaleDateString();
     }
 
@@ -73,9 +73,9 @@
         );
     }
 
-    /*const comment = {
+    const comment = {
         date: new Date(),
-        text: 123,
+        text: 'I hope you enjoy learning React!',
         author: {
             name: 'Hello Kitty',
             avatarUrl: 'http://placekitten.com/g/64/64'
@@ -83,35 +83,13 @@
     };
     ReactDOM.render(
             <Comment
-                date={comment.date}
-                text={comment.text}
-                author={comment.author}
-            />,
+                    date={comment.date}
+                    text={comment.text}
+                    author={comment.author}/>,
         document.getElementById('root')
     );*/
-
-
-    //设置默认的props的值
-    Comment.defaultProps={
-        date: new Date(),
-        text: 'I hope you enjoy your life!',
-        author: {
-            name: 'Hello World',
-            avatarUrl: 'http://placekitten.com/g/64/64'
-        }
-    };
-    //设置props值的校验
-    Comment.propTypes={
-    //  data:PropTypes.required,
-        text:PropTypes.string.isRequired,
-        author: PropTypes.object
-    };
-    ReactDOM.render(
-            <Comment/>,
-        document.getElementById('root')
-    );
-
 
 </script>
 </body>
 </html>
+

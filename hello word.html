@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    /*let myStyle = {
+        fontSize: 100,
+        color: '#FF0000'
+    };
+
+    let Welcome=(props)=> {
+        let arr=[props.name,props.title];
+        return <h1  style={myStyle}>Hi, {arr}</h1>;
+    }
+
+    const element = <Welcome title="Marry" name="Sara" />;
+    ReactDOM.render(
+            element,
+            document.getElementById('root')
+    );*/
+
+    class Clock extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={date:new Date()}
+        }
+
+        componentDidMount(){
+            this.timerID=setInterval(()=>this.tick(),1000)
+        }
+
+        componentWillMount(){
+            clearInterval(this.timerID);
+        }
+
+        tick(){
+           this.setState({
+               date:new Date()
+           })
+        }
+
+        render(){
+            return (
+            <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+        );
+        }
+    }
+
+    ReactDOM.render(
+    <Clock />,
+            document.getElementById('root')
+    );
+
+
+</script>
+</body>
+</html>

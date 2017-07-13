@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+
+    class Page extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {showWarning: true}
+            this.handleToggleClick = this.handleToggleClick.bind(this);
+        }
+
+        handleToggleClick() {
+            this.setState({
+                showWarning:!this.state.showWarning
+            });
+        }
+
+        WarningBanner(warn) {
+
+            if (!this.state.showWarning) {
+                return null;
+            }
+            return (<div className="warning">Warning!</div>);
+        }
+
+        render() {
+            return (
+                    <div>
+                        {this.WarningBanner()}
+                        <button onClick={this.handleToggleClick}>
+                        {this.state.showWarning ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
+                    );
+                }
+    }
+
+    ReactDOM.render(
+    <Page />,
+            document.getElementById('root')
+    );
+
+</script>
+</body>
+</html>

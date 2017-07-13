@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+    const numbers = [1, 2, 3, 4, 5];
+
+    class List extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+               data:props.number
+            };
+        }
+
+        render(){
+            const item=this.state.data.map((number,index)=>
+                <li key={index.toString()}>{number}</li>
+            );
+            return(
+                    <ul>{item}</ul>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <List number={numbers} />,
+        document.getElementById('root')
+    );
+
+</script>
+</body>
+</html>
