@@ -11,6 +11,10 @@
             display: block;
             margin:20px;
         }
+        .colorBox label{
+            display: inline-block;
+            margin:20px;
+        }
         label span{
             width: 100px;
             text-align: right;
@@ -88,12 +92,12 @@
 
         render(){
             return(
-                    <label>
-                        <span>color:</span>
-                        red<input name="red" type="checkbox" value='red' ref={(input)=>this.colorRed=input}/>
-                        green<input name="green" type="checkbox" value='green' ref={(input)=>this.colorGreen=input}/>
-                        gray<input name="gray" type="checkbox" value='gray' ref={(input)=>this.colorGray=input}/>
-                    </label>
+                    <div className="colorBox" style={{ marginLeft: '20px'}} ref={this.props.colorRef}>
+                        <span style={{ width: '100px',display: 'inline-block',textAlign: 'right'}}>color:</span>
+                        <label>red<input name="red" type="checkbox" value='red' defaultChecked={true}/></label>
+                        <label>green<input name="green" type="checkbox" value='green'/></label>
+                        <label>gray<input name="gray" type="checkbox" value='gray'/></label>
+                    </div>
             );
         }
 
@@ -101,9 +105,6 @@
     class NameForm extends React.Component {
         constructor(props) {
             super(props);
-            this.state = {
-                color:''
-            };
         }
 
         handleSubmit = (e) => {
@@ -111,10 +112,15 @@
             console.info(`A name was submitted: ${this.nameInput.value}`);
             console.info(`A description was submitted: ${this.desInput.value}`);
             console.info(`A hobby was submitted: ${this.hobbyValue.value}`);
-            if(this.colorRed.checked||this.colorRed.checked||this.colorRed.checked){
 
+            let checkbox=this.colorValue.getElementsByTagName("*");
+            let color='';
+            for(let i=1;i<checkbox.length;i++){
+                if(checkbox[i].type==='checkbox' && checkbox[i].checked){
+                    color+=`${checkbox[i].value} `;
+                }
             }
-            console.info(`A color was submitted: ${this.colorRed.value} ${this.colorGreen.value} ${this.colorGray.value}`);
+            console.info(`A color was submitted: ${color}`);
         };
 
         render(){
@@ -124,7 +130,7 @@
                             <span>Name:</span>
                             <input name="name" type="text" defaultValue="Marilyn" ref={(input)=>this.nameInput=input} placeholder="Enter your name!"/>
                         </label>
-
+                        <Colors colorRef={(ele)=>this.colorValue=ele}/>
                         <label>
                             <span>Description:</span>
                             <textarea name="des" rows="10" cols="50" ref={(input)=>this.desInput=input} defaultValue="I am a good boy!"  placeholder="Enter your description!"/>

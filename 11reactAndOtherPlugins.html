@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.min.css">
+    <style>
+        .Chosen-select {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    /*class Chosen extends React.Component{
+
+    	componentDidMount() {
+		    this.$el = $(this.el);
+		    this.$el.chosen();
+		    this.handleChange = this.handleChange.bind(this);
+		    this.$el.on('change',this.handleChange);
+	    }
+	    componentDidUpdate(prevProps) {
+		    if (prevProps.children !== this.props.children) {
+			    this.$el.trigger("chosen:updated");
+		    }
+	    }
+
+	    componentWillUnmount() {
+    		this.$el.off('change',this.handleChange);
+		    this.$el.chosen('destroy');
+	    }
+	    handleChange(e){
+            this.props.onChange(e.target.value);
+        }
+
+	    render() {
+		    return (
+                    <div>
+                        <select className="Chosen-select" ref={el => this.el = el}>
+						    {this.props.children}
+                        </select>
+                    </div>
+		    );
+	    }
+    }
+
+    function Example() {
+        return(
+                <Chosen onChange={value=>console.log(value)}>
+                    <option value="vanilla">vanilla</option>
+                    <option value="chocolate">chocolate</option>
+                    <option value="strawberry">strawberry</option>
+                    <option value="apple">apple</option>
+                    <option value="orange">orange</option>
+                    <option value="pear">pear</option>
+                </Chosen>
+        )
+    }
+
+    ReactDOM.render(
+            <Example />,
+        document.getElementById('root')
+    );*/
+
+    function Button(props) {
+        return(<button onClick={props.onClick}>Say Hello!</button>)
+    }
+    function HelloButton() {
+        function handleClick() {
+            alert('Hello!!!');
+        }
+        return(<Button onClick={handleClick}/>)
+    }
+    ReactDOM.render(
+    	<HelloButton/>,
+        document.getElementById('root')
+    );
+
+</script>
+</body>
+</html>
