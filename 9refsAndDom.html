@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="react15.6.1/react-15.6.1.js"></script>
+    <script src="react15.6.1/react-dom-15.6.1.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        .btn {
+            font-size: 20px;
+            padding: 5px 10px;
+            color: red;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-left: 40px;
+        }
+
+        .input {
+            line-height: 20px;
+            padding: 2px 5px;
+            border: 1px solid #d1d1d1;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .input:focus {
+            border: 1px solid #6cdfe6;
+        }
+
+        .btn:focus {
+            outline: none;
+            border: 1px solid #6cdfe6;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    /*class CustomTextInput extends React.Component{
+     constructor(props) {
+     super(props);
+     this.focus = this.focus.bind(this);
+     }
+
+     focus(){
+     console.log(this.refs);
+     this.text.focus();
+     };
+
+     componentDidMount() {
+     this.text.focus();
+     }
+
+     render(){
+     return(
+     <div>
+     <input className="input" type="text" ref={(input)=>{
+     this.text=input;
+     console.log(this.text)
+     }}/>
+     <input className="btn" type="button" ref="btnInput" value="Focus the input" onClick={this.focus}/>
+     <p ref="msg">this is a test of ref!</p>
+     </div>
+     )
+     };
+     }
+
+     ReactDOM.render(
+     <CustomTextInput />,
+     document.getElementById('root')
+     );*/
+
+    function CustomTextInput(props) {
+        return (
+                <input className="input" ref={props.inputRef}/>
+        );
+    }
+
+    function Parent(props) {
+        return (
+                <div>
+                    <span>My input:</span>
+                    <CustomTextInput inputRef={props.inputRef}/>
+                </div>
+        );
+    }
+
+
+    class Grandparent extends React.Component {
+        componentDidMount() {
+            this.inputElement.focus();
+        }
+
+        render() {
+            return (
+                    <Parent inputRef={el => this.inputElement = el}/>
+            );
+        }
+    }
+
+    ReactDOM.render(
+            <Grandparent/>,
+        document.getElementById('root')
+    );
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="react15.6.1/react-15.6.1.js"></script>
+    <script src="react15.6.1/react-dom-15.6.1.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    class Tips extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                isUser: props.isUser
+            };
+        }
+        static style = {
+            warning: {
+                backgroundColor: 'red',
+                textAlign: 'left',
+                width: 300,
+                padding: 10,
+                fontSize: '14pt',
+                color: 'white',
+                marginBottom:20
+            }
+        };
+        render(){
+            console.info(this.props);
+            if (this.props.isUser) {
+                return null;
+            }
+            return (
+                    <div style={Tips.style.warning}>Please create an account！</div>
+            );
+        }
+
+    }
+
+    class Greeting extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                isUser: props.isUser
+            };
+        }
+
+        handleClick = () => {
+            this.setState({isUser: !this.state.isUser});
+        };
+        static style = {
+            btn: {
+                fontSize: 20,
+                padding: "5px 10px",
+                color: 'red',
+                border: '1px solid #ddd',
+                borderRadius: 5,
+                backgroundColor: '#fff'
+            }
+        };
+        render() {
+            let element=null, message=[];
+            if(this.state.isUser){
+                element = <h1>Welcome back!</h1>;
+                message = ['React', 'Angular', 'Vue'];
+            }else{
+                element = null;
+                message=[];
+            }
+            return (
+                    <div>
+                        {element}
+                        <h2 ref="h2">You are {this.state.isUser?'User':'Guest'}.</h2>
+                        {message.length > 0 &&
+                        <h2>You have {message.length} unread messages.</h2>}
+                        <Tips isUser={this.state.isUser} />
+                        <button style={Greeting.style.btn} ref="btn" onClick={this.handleClick}>click to change role</button>
+                    </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+            <Greeting  isUser={true} />,
+        document.getElementById('root')
+    );
+
+</script>
+</body>
+</html>

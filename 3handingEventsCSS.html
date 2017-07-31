@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="react15.6.1/react-15.6.1.js"></script>
+    <script src="react15.6.1/react-dom-15.6.1.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+    class Clock extends React.Component {
+        constructor(props) {
+            super(props);
+//            console.log(this);
+            this.state = {date: new Date()};
+        }
+
+        handleClick = () => {
+            console.log(this);//不使用bind也可以使用箭头函数解决this指向改变的问题
+            this.setState({
+                date: new Date()
+            });
+        };
+        static preventLink = {
+            noLink(e)  {
+//            console.error(this);//null
+//            console.log(e);
+                e.preventDefault();
+                console.info('The link was clicked.');
+            }
+        };
+        static style = {
+            title: {
+                fontSize: 40,
+                color: 'red'
+            },
+            btn: {
+                fontSize: 20,
+                padding: "5px 10px",
+                color: 'red',
+                border: '1px solid #ddd',
+                borderRadius: 5,
+                backgroundColor: '#fff',
+                marginTop: 30
+            },
+            link: {
+                textDecoration: 'none',
+                color: 'green',
+                fontSize: 24
+            },
+            noLink(e)  {
+                e.preventDefault();
+                console.info('The link cannot clicked.');
+            }
+        };
+
+        render() {
+            return (
+                    <div>
+                        <h1 style={Clock.style.title} ref="h1">Hello, world!!!</h1>
+                        <h2 ref="h2">The last time you clicked is {this.state.date.toLocaleTimeString()}.</h2>
+                        <div><a onClick={Clock.style.noLink} href="http://www.baidu.com" style={Clock.style.link}>Prevent link
+                            to Baidu!</a></div>
+                        <button ref="btn" style={Clock.style.btn} onClick={this.handleClick}>click to update time
+                        </button>
+                        {/*直接写this.handleClick，打印出null，进行this.handleClick=this.handleClick.bind(this)绑定即可解决，this指向改变原因不明*/}
+                    </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+            <Clock  />,
+        document.getElementById('root')
+    );
+
+</script>
+</body>
+</html>

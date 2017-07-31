@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="react15.6.1/react-15.6.1.js"></script>
+    <script src="react15.6.1/react-dom-15.6.1.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    const scaleNames = {
+        km: 'Kilometer',
+        m: 'meter'
+    };
+    function toKilometer(num) {
+        return num /1000;
+    }
+    function toMeter(num) {
+        return num*1000;
+    }
+    function FastOrNot(props) {
+        if (props.velocity >= 100) {
+            return <p>Yeah! It is so fast!</p>;
+        }
+        return <p>Oh, no! It is too slow!</p>;
+    }
+    function tryConvert(num, convert) {
+        const input = parseFloat(num);
+        if (Number.isNaN(input)) {
+            return '';
+        }
+        const output = convert(input);
+        const rounded = Math.round(output * 1000) / 1000;
+        return rounded.toString();
+    }
+    class InputVelocity extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        handleChange=(e)=> {
+            this.props.velocityChange(e.target.value);
+        };
+        render() {
+            return (
+                    <fieldset>
+                        <legend>Enter velocity in {scaleNames[this.props.scale]}:</legend>
+                        <input value={this.props.num} onChange={this.handleChange} />
+                    </fieldset>
+            );
+        }
+    }
+
+    class Calculator extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {num: '', scale: 'km'};
+        }
+        handleKilometer=(num)=> {
+            this.setState({scale: 'km', num});
+        };
+        handleMeter=(num)=> {
+            this.setState({scale: 'm', num});
+        };
+        render() {
+            const scale = this.state.scale;
+            const num = this.state.num;
+            const km = scale === 'm' ? tryConvert(num, toKilometer) : num;
+            const m = scale === 'km' ? tryConvert(num, toMeter) : num;
+            return (
+                    <div>
+                        <InputVelocity scale="km" num={km}
+                                       velocityChange={this.handleKilometer} />
+                        <InputVelocity scale="m" num={m}
+                                       velocityChange={this.handleMeter} />
+                        <FastOrNot velocity={parseFloat(km)} />
+                    </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+        <Calculator />,
+        document.getElementById('root')
+    );
+</script>
+</body>
+</html>
